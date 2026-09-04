@@ -1,0 +1,13 @@
+# MVP 核心依赖
+PyYAML>=6.0
+Jinja2>=3.1.0
+click>=8.1.0
+rich>=13.0.0
+
+# 可选依赖：Word 报告
+# 安装命令：pip install -e ".[word]"
+# python-docx>=1.1.0
+
+# 开发依赖（测试）
+pytest>=8.0.0
+pytest-cov>=4.1.0
