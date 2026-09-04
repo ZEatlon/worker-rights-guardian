@@ -1,0 +1,69 @@
+{% set violation_lines = [] %}
+{% for v in violations %}
+{%- set line = "[" ~ v.code ~ " / " ~ violation_label(v.code) ~ "] " ~ (v.description or '') %}
+{%- if v.amount is defined and v.amount and v.amount != 0 %}
+{%- set line = line ~ " (amount involved: " ~ v.amount | format_currency(currency or 'USD') ~ ")" %}
+{%- endif %}
+{%- set _ = violation_lines.append(line) %}
+{%- endfor %}
+Subject:Formal complaint regarding {{ employer_name or '[Name of Respondent]' }}
+
+To: {{ recipient_name or '[Recipient]' }},
+
+Dear Sir or Madam,
+
+My name is {{ complainant_name or '[Complainant]' }} (contact: {{ complainant_contact or '[contact]' }}).
+I am writing to formally report serious violations of labour rights committed by
+{{ employer_name or '[Name of Respondent]' }} and respectfully request an investigation
+in accordance with applicable laws and ILO conventions.
+
+## 1. Parties
+
+- Complainant: {{ complainant_name or '[Complainant]' }}
+- Contact:      {{ complainant_contact or '[contact]' }}
+- Employer:     {{ employer_name or '[Respondent]' }}
+- Position / Workplace: {{ position or '[position]' }} / {{ workplace or '[workplace]' }}
+- Employment period: {{ employment_start or '[start date]' }} to {{ employment_end or 'present' }}
+
+## 2. Alleged Violations
+
+{% for line in violation_lines -%}
+- {{ line }}
+{% endfor %}
+Further details (dates, locations, persons involved) are documented in the attached
+evidence pack.
+
+## 3. Evidence Submitted
+
+This submission is accompanied by {{ evidence_count }} pieces of evidence. The
+complete index and SHA-256 integrity hashes are recorded in
+`evidence_index.json`; original files are stored under `evidence/`.
+
+{% if summary -%}
+## 4. Case Summary
+
+{{ summary }}
+
+{% endif -%}
+## 5. Requested Actions
+
+1. Open an investigation into {{ employer_name or '[Respondent]' }}.
+2. Order the employer to remediate all violations, including payment of outstanding
+   wages, overtime compensation, social-insurance contributions, and any
+   compensation for occupational injury.
+3. Hold responsible persons accountable under applicable law.
+4. Protect the complainant from retaliation.
+
+## 6. Declaration
+
+The statements made above are true and accurate to the best of my knowledge.
+Should any information be found untrue, I am willing to bear the corresponding
+legal responsibility.
+
+I would be grateful for your consideration and stand ready to provide further
+materials upon request.
+
+Yours faithfully,
+
+{{ complainant_name or '[Complainant]' }}
+Date: {{ today | format_date }}
