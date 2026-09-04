@@ -1,0 +1,21 @@
+name: "wage_default"
+description: "拖欠工资场景的标准剧本"
+language: zh
+violations:
+  - code: wage
+    description: "被拖欠工资"
+    default_amount: 0
+steps:
+  - name: "向当地劳动监察机构投诉"
+    recipient_categories:
+      - china
+    intent: "请求当地劳动保障监察部门立案调查"
+  - name: "向工会求助"
+    recipient_categories:
+      - china
+    intent: "请求工会提供法律援助"
+    institution_filter: "中华全国总工会"
+  - name: "向国际机构反映"
+    recipient_categories:
+      - international
+    intent: "请求国际劳工组织关注"
