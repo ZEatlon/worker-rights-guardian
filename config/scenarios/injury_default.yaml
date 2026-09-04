@@ -1,0 +1,21 @@
+name: "injury_default"
+description: "工伤 / 职业危害场景的标准剧本"
+language: zh
+violations:
+  - code: injury
+    description: "工作中受伤 / 疑似职业病"
+    default_amount: 0
+steps:
+  - name: "向当地劳动监察机构举报"
+    recipient_categories:
+      - china
+    intent: "请求调查工作场所安全"
+  - name: "向工会求助"
+    recipient_categories:
+      - china
+    intent: "请求工会介入,提供法律援助"
+    institution_filter: "中华全国总工会"
+  - name: "向国际机构反映"
+    recipient_categories:
+      - international
+    intent: "请求国际劳工组织关注职业安全"
