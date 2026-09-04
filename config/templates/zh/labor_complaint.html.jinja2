@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>劳动权益举报 - {{ employer_name or '[被投诉单位]' }}</title>
+</head>
+<body style="font-family:'Microsoft YaHei','PingFang SC',Arial,sans-serif;line-height:1.7;color:#222;max-width:760px;margin:0 auto;padding:24px;">
+  <div style="background:#fff5f5;border-left:4px solid #d33;padding:12px 16px;margin-bottom:24px;">
+    <strong style="color:#a00;">关于 {{ employer_name or '[被投诉单位]' }} 涉嫌违反劳动法律法规的举报</strong>
+  </div>
+  <p>尊敬的 {{ recipient_name or '[收件机构]' }}:</p>
+  <p>我是 <strong>{{ complainant_name or '[投诉人姓名]' }}</strong>(联系方式:{{ complainant_contact or '[联系方式]' }}),
+     现就 {{ employer_name or '[被投诉单位]' }} 严重侵害劳动者合法权益的事项,
+     向贵机构作如下反映,恳请依法调查处理。</p>
+
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">一、当事人基本情况</h2>
+  <table style="border-collapse:collapse;width:100%;">
+    <tr><td style="padding:6px;background:#f7f7f7;width:30%;"><strong>投诉人</strong></td><td style="padding:6px;">{{ complainant_name or '[姓名]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>联系方式</strong></td><td style="padding:6px;">{{ complainant_contact or '[联系方式]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>被投诉单位</strong></td><td style="padding:6px;">{{ employer_name or '[被投诉单位]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>岗位/地点</strong></td><td style="padding:6px;">{{ position or '[岗位]' }} / {{ workplace or '[工作地点]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>雇佣期间</strong></td><td style="padding:6px;">{{ employment_start or '[入职日期]' }} 至 {{ employment_end or '至今' }}</td></tr>
+  </table>
+
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">二、涉嫌违法违规事项</h2>
+  <ul>
+  {% for v in violations -%}
+    <li>
+      <span style="background:#d33;color:#fff;padding:2px 8px;border-radius:3px;font-size:12px;">{{ v.code }}</span>
+      <strong>{{ violation_label(v.code) }}</strong>:{{ v.description or '' }}
+      {%- if v.amount is defined and v.amount and v.amount != 0 %}
+      <em style="color:#a00;">(涉及金额:{{ v.amount | format_currency(currency or 'CNY') }})</em>
+      {%- endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">三、已附证据</h2>
+  <p>本邮件附带 <strong>{{ evidence_count }}</strong> 项证据,完整索引及 SHA-256 校验值见
+     <code>evidence_index.json</code>,原文存放于 <code>evidence/</code> 目录。</p>
+
+  {% if summary -%}
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">四、案件摘要</h2>
+  <div style="background:#fafafa;border:1px solid #eee;padding:12px 16px;">{{ summary }}</div>
+  {% endif -%}
+
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">五、请求事项</h2>
+  <ol>
+    <li>依法对 {{ employer_name or '[被投诉单位]' }} 的违法违规行为进行调查;</li>
+    <li>责令改正违法行为,补发拖欠报酬、补缴社保、给予工伤赔偿等;</li>
+    <li>依法追究相关责任人的法律责任;</li>
+    <li>保障投诉人依法维权的合法权益,防止打击报复。</li>
+  </ol>
+
+  <h2 style="color:#a00;border-bottom:2px solid #d33;padding-bottom:6px;">六、声明</h2>
+  <p>本举报所反映事项均属事实,如有不实本人愿承担相应法律责任。
+     如需补充材料请通过上述联系方式联系。</p>
+
+  <hr style="margin:24px 0;border:none;border-top:1px solid #ddd;">
+  <p>此致<br>敬礼</p>
+  <p style="margin-top:24px;">
+    <strong>{{ complainant_name or '[姓名]' }}</strong><br>
+    日期:{{ today | format_date }}
+  </p>
+
+  <p style="margin-top:32px;padding:12px;background:#f5f5f5;border-left:4px solid #999;font-size:12px;color:#666;">
+    本邮件由 Worker Rights Guardian (工人权益守护) 工具辅助生成,
+    仅用于依法维权与材料整理,不构成法律意见。
+  </p>
+</body>
+</html>
