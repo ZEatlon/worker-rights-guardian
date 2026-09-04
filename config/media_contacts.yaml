@@ -1,0 +1,154 @@
+# ============================================================
+# 媒体联系方式数据库
+# ============================================================
+# 用于 `--media` 选项时显示给用户参考。
+# 字段说明:
+#   - name     媒体名称
+#   - type     类型: newspaper / tv / radio / magazine / online
+#   - region   国家 / 地区
+#   - email    举报 / 线索邮箱(若有)
+#   - url      网址
+#   - contact  电话
+#   - description 简介
+# 邮箱与联系方式均来自各媒体官网或公开渠道,如有变更请通过 PR 更新。
+# ============================================================
+
+china_media:
+  - name: "新华社新闻线索"
+    type: "online"
+    region: "中国"
+    url: "https://www.news.cn/"
+    description: "国家通讯社,可关注重大劳动权益事件"
+  - name: "央视新闻线索"
+    type: "tv"
+    region: "中国"
+    url: "https://news.cctv.com/"
+    description: "中央电视台新闻频道"
+  - name: "澎湃新闻 - 投诉湃"
+    type: "online"
+    region: "中国"
+    url: "https://www.thepaper.cn/"
+    description: "澎湃新闻,设有消费维权与投诉报道栏目"
+  - name: "界面新闻"
+    type: "online"
+    region: "中国"
+    url: "https://www.jiemian.com/"
+    description: "聚焦财经新闻,常报道劳资议题"
+  - name: "财新网"
+    type: "online"
+    region: "中国"
+    url: "https://www.caixin.com/"
+    description: "深度报道劳工权益议题"
+  - name: "南方周末"
+    type: "newspaper"
+    region: "中国"
+    url: "https://www.infzm.com/"
+    description: "深度调查报道"
+
+international_media:
+  - name: "BBC News"
+    type: "tv"
+    region: "UK"
+    email: "haveyoursay@bbc.co.uk"
+    url: "https://www.bbc.co.uk/news/contact"
+    description: "英国广播公司新闻线索邮箱"
+
+  - name: "The Guardian"
+    type: "newspaper"
+    region: "UK"
+    email: "tips@theguardian.com"
+    url: "https://www.theguardian.com/help/contact-us"
+    description: "英国卫报,可发送调查线索"
+
+  - name: "Reuters"
+    type: "online"
+    region: "global"
+    url: "https://www.reuters.com/"
+    description: "路透社,可通过 reuters.com 联系记者"
+
+  - name: "The New York Times - Tips"
+    type: "newspaper"
+    region: "USA"
+    email: "tips@nytimes.com"
+    url: "https://www.nytimes.com/tips"
+    description: "纽约时报线索渠道"
+
+  - name: "Washington Post"
+    type: "newspaper"
+    region: "USA"
+    url: "https://www.washingtonpost.com/"
+    description: "华盛顿邮报"
+
+  - name: "Al Jazeera"
+    type: "tv"
+    region: "global"
+    email: "tips@aljazeera.net"
+    url: "https://www.aljazeera.com/about/contact-us"
+    description: "半岛电视台"
+
+  - name: "DW - Deutsche Welle"
+    type: "tv"
+    region: "Germany"
+    url: "https://www.dw.com/"
+    description: "德国之声"
+
+  - name: "Le Monde"
+    type: "newspaper"
+    region: "France"
+    url: "https://www.lemonde.fr/"
+    description: "法国世界报"
+
+  - name: "NHK 報道局"
+    type: "tv"
+    region: "Japan"
+    url: "https://www.nhk.or.jp/info-contact/"
+    description: "NHK 报道局,可发送线索"
+
+  - name: "Asahi Shimbun"
+    type: "newspaper"
+    region: "Japan"
+    url: "https://www.asahi.com/"
+    description: "朝日新闻"
+
+  - name: "Kyodo News"
+    type: "online"
+    region: "Japan"
+    url: "https://english.kyodonews.net/"
+    description: "共同社英文版"
+
+  - name: "SBS News"
+    type: "tv"
+    region: "Australia"
+    url: "https://www.sbs.com.au/news"
+    description: "SBS 新闻,关注多元文化与劳工议题"
+
+  - name: "ABC News Australia"
+    type: "online"
+    region: "Australia"
+    email: "yourstory@your.abc.net.au"
+    url: "https://www.abc.net.au/news/contact/"
+    description: "澳大利亚广播公司新闻"
+
+  - name: "The Sydney Morning Herald"
+    type: "newspaper"
+    region: "Australia"
+    url: "https://www.smh.com.au/"
+    description: "悉尼先驱晨报"
+
+  - name: "Stuff.co.nz"
+    type: "online"
+    region: "New Zealand"
+    url: "https://www.stuff.co.nz/"
+    description: "新西兰 Stuff 新闻网"
+
+  - name: "New Zealand Herald"
+    type: "newspaper"
+    region: "New Zealand"
+    url: "https://www.nzherald.co.nz/"
+    description: "新西兰先驱报"
+
+  - name: "Yonhap News"
+    type: "online"
+    region: "Korea"
+    url: "https://en.yna.co.kr/"
+    description: "韩国联合通讯社"
