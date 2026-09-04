@@ -1,0 +1,63 @@
+{% set violation_lines = [] %}
+{% for v in violations %}
+{%- set line = "【" ~ v.code ~ " / " ~ violation_label(v.code) ~ "】 " ~ (v.description or '') %}
+{%- if v.amount is defined and v.amount and v.amount != 0 %}
+{%- set line = line ~ "(涉及金额:" ~ v.amount | format_currency(currency or 'CNY') ~ ")" %}
+{%- endif %}
+{%- set _ = violation_lines.append(line) %}
+{%- endfor %}
+主题:关于{{ employer_name or '[被投诉单位名称]' }}涉嫌违反劳动法律法规的举报
+
+尊敬的 {{ recipient_name or '[收件机构]' }}：
+
+您好。
+
+我是 {{ complainant_name or '[投诉人姓名]' }}（联系方式:{{ complainant_contact or '[联系方式]' }}），
+现就{{ employer_name or '[被投诉单位名称]' }}严重侵害劳动者合法权益的事项，向贵机构作如下反映，
+恳请依据相关法律法规予以调查处理。
+
+## 一、当事人基本情况
+
+- 投诉人:{{ complainant_name or '[投诉人姓名]' }}
+- 联系方式:{{ complainant_contact or '[联系方式]' }}
+- 工作单位:{{ employer_name or '[被投诉单位名称]' }}
+- 岗位 / 地点:{{ position or '[岗位]' }} / {{ workplace or '[工作地点]' }}
+- 雇佣期间:{{ employment_start or '[入职日期]' }} 至 {{ employment_end or '至今' }}
+
+## 二、涉嫌违法违规事项
+
+{% for line in violation_lines -%}
+- {{ line }}
+{% endfor %}
+事件经过、相关时间、地点、人物详见随信所附证据清单。
+
+## 三、已附证据
+
+本邮件附带 {{ evidence_count }} 项证据,完整索引及 SHA-256 校验值见
+`evidence_index.json`,原文存放于 `evidence/` 目录。
+
+{% if summary -%}
+## 四、案件摘要
+
+{{ summary }}
+
+{% endif -%}
+## 五、请求事项
+
+1. 依法对{{ employer_name or '[被投诉单位]' }}的违法违规行为进行调查;
+2. 责令其改正违法行为,补发拖欠报酬、补缴社保、给予工伤赔偿等;
+3. 依法追究相关责任人的法律责任;
+4. 保障投诉人依法维权的合法权益,防止打击报复。
+
+## 六、声明
+
+本举报所反映事项均属事实,如有不实本人愿承担相应法律责任。
+恳请贵机构依法处理,如需补充材料请通过上述联系方式与本人联系。
+感谢您的关注与帮助。
+
+此致
+
+敬礼
+
+投诉人:{{ complainant_name or '[姓名]' }}
+日期:{{ today | format_date }}
