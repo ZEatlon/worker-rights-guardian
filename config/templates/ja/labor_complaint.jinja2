@@ -1,0 +1,64 @@
+{% set violation_lines = [] %}
+{% for v in violations %}
+{%- set line = "【" ~ v.code ~ " / " ~ violation_label(v.code) ~ "】 " ~ (v.description or '') %}
+{%- if v.amount is defined and v.amount and v.amount != 0 %}
+{%- set line = line ~ "(関連金額:" ~ v.amount | format_currency(currency or 'JPY') ~ ")" %}
+{%- endif %}
+{%- set _ = violation_lines.append(line) %}
+{%- endfor %}
+件名:労働法令違反に関する通報({{ employer_name or '[被通報事業者名]' }})
+
+{{ recipient_name or '[通報先]' }}御中
+
+拝啓
+
+私、{{ complainant_name or '[通報者氏名]' }}(連絡先:{{ complainant_contact or '[連絡先]' }})
+は、{{ employer_name or '[被通報事業者名]' }}による重大な労働権侵害について、
+関係法令および ILO 国際労働基準に基づき調査いただきたく、以下の通り通報いたします。
+
+## 1. 当事者情報
+
+- 通報者:{{ complainant_name or '[通報者氏名]' }}
+- 連絡先:{{ complainant_contact or '[連絡先]' }}
+- 事業者:{{ employer_name or '[被通報事業者名]' }}
+- 役職 / 勤務地:{{ position or '[役職]' }} / {{ workplace or '[勤務地]' }}
+- 雇用期間:{{ employment_start or '[入社日]' }} 〜 {{ employment_end or '現在' }}
+
+## 2. 違反が疑われる事項
+
+{% for line in violation_lines -%}
+- {{ line }}
+{% endfor %}
+詳細な事実関係(日時・場所・関係者)は、添付の証拠資料をご参照ください。
+
+## 3. 添付証拠
+
+本通報には {{ evidence_count }} 件の証拠を添付しています。
+全件の目録および SHA-256 整合性ハッシュは `evidence_index.json` に、
+原本ファイルは `evidence/` ディレクトリに格納しています。
+
+{% if summary -%}
+## 4. 案件概要
+
+{{ summary }}
+
+{% endif -%}
+## 5. 要請事項
+
+1. {{ employer_name or '[被通報事業者]' }}に対する法令違反の徹底した調査。
+2. 未払い賃金・残業代の支払い、社会保険料の納付、労災補償等、
+   違法状態の是正命令。
+3. 関係者の法的責任の追及。
+4. 通報者に対する報復行為の禁止と通報者の安全確保。
+
+## 6. 宣誓
+
+上記の内容は事実であり、虚偽があった場合は法的責任を負担することを誓います。
+追加資料のご要望や確認事項は、上記連絡先までご連絡ください。
+
+何卒、厳正なるご対応をお願い申し上げます。
+
+敬具
+
+{{ complainant_name or '[通報者氏名]' }}
+日付:{{ today | format_date }}
