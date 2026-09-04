@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Labour Rights Complaint - {{ employer_name or '[Respondent]' }}</title>
+</head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;line-height:1.7;color:#222;max-width:760px;margin:0 auto;padding:24px;">
+  <div style="background:#fff5f5;border-left:4px solid #c33;padding:12px 16px;margin-bottom:24px;">
+    <strong style="color:#900;">Formal complaint regarding {{ employer_name or '[Respondent]' }}</strong>
+  </div>
+  <p>To: <strong>{{ recipient_name or '[Recipient]' }}</strong>,</p>
+  <p>My name is <strong>{{ complainant_name or '[Complainant]' }}</strong> (contact: {{ complainant_contact or '[contact]' }}).
+     I am writing to report serious violations of labour rights by {{ employer_name or '[Respondent]' }}
+     and respectfully request an investigation in accordance with applicable laws and ILO conventions.</p>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">1. Parties</h2>
+  <table style="border-collapse:collapse;width:100%;">
+    <tr><td style="padding:6px;background:#f7f7f7;width:30%;"><strong>Complainant</strong></td><td style="padding:6px;">{{ complainant_name or '[Complainant]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>Contact</strong></td><td style="padding:6px;">{{ complainant_contact or '[contact]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>Employer</strong></td><td style="padding:6px;">{{ employer_name or '[Respondent]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>Position / Workplace</strong></td><td style="padding:6px;">{{ position or '[position]' }} / {{ workplace or '[workplace]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>Employment period</strong></td><td style="padding:6px;">{{ employment_start or '[start date]' }} to {{ employment_end or 'present' }}</td></tr>
+  </table>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">2. Alleged Violations</h2>
+  <ul>
+  {% for v in violations -%}
+    <li>
+      <span style="background:#c33;color:#fff;padding:2px 8px;border-radius:3px;font-size:12px;">{{ v.code }}</span>
+      <strong>{{ violation_label(v.code) }}</strong>: {{ v.description or '' }}
+      {%- if v.amount is defined and v.amount and v.amount != 0 %}
+      <em style="color:#900;">(amount involved: {{ v.amount | format_currency(currency or 'USD') }})</em>
+      {%- endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">3. Evidence Submitted</h2>
+  <p>This submission is accompanied by <strong>{{ evidence_count }}</strong> pieces of evidence. The
+     complete index and SHA-256 integrity hashes are recorded in <code>evidence_index.json</code>;
+     original files are stored under <code>evidence/</code>.</p>
+
+  {% if summary -%}
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">4. Case Summary</h2>
+  <div style="background:#fafafa;border:1px solid #eee;padding:12px 16px;">{{ summary }}</div>
+  {% endif -%}
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">5. Requested Actions</h2>
+  <ol>
+    <li>Open an investigation into {{ employer_name or '[Respondent]' }}.</li>
+    <li>Order the employer to remediate all violations, including payment of outstanding wages,
+        overtime compensation, social-insurance contributions, and compensation for occupational injury.</li>
+    <li>Hold responsible persons accountable under applicable law.</li>
+    <li>Protect the complainant from retaliation.</li>
+  </ol>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">6. Declaration</h2>
+  <p>The statements made above are true and accurate to the best of my knowledge.
+     Should any information be found untrue, I am willing to bear the corresponding legal responsibility.
+     Further materials are available upon request.</p>
+
+  <hr style="margin:24px 0;border:none;border-top:1px solid #ddd;">
+  <p>Yours faithfully,</p>
+  <p style="margin-top:24px;">
+    <strong>{{ complainant_name or '[Complainant]' }}</strong><br>
+    Date: {{ today | format_date }}
+  </p>
+
+  <p style="margin-top:32px;padding:12px;background:#f5f5f5;border-left:4px solid #999;font-size:12px;color:#666;">
+    This message was drafted with assistance from Worker Rights Guardian.
+    It is intended solely for lawful labour-rights advocacy and does not constitute legal advice.
+  </p>
+</body>
+</html>
