@@ -1,0 +1,63 @@
+{% set violation_lines = [] %}
+{% for v in violations %}
+{%- set line = "[" ~ v.code ~ " / " ~ violation_label(v.code) ~ "] " ~ (v.description or '') %}
+{%- if v.amount is defined and v.amount and v.amount != 0 %}
+{%- set line = line ~ "(관련 금액: " ~ v.amount | format_currency(currency or 'KRW') ~ ")" %}
+{%- endif %}
+{%- set _ = violation_lines.append(line) %}
+{%- endfor %}
+제목:{{ employer_name or '[피신고 사업체명]' }}의 노동법 위반 신고
+
+{{ recipient_name or '[수신 기관]' }} 귀하
+
+안녕하십니까.
+
+저는 {{ complainant_name or '[신고인 성명]' }}(연락처:{{ complainant_contact or '[연락처]' }})로서,
+{{ employer_name or '[피신고 사업체명]' }}의 심각한 노동권 침해에 관하여
+관계 법률 및 ILO 국제 노동기준에 따라 조사를 요청드리고자 다음과 같이 신고합니다.
+
+## 1. 당사자基本信息
+
+- 신고인:{{ complainant_name or '[신고인 성명]' }}
+- 연락처:{{ complainant_contact or '[연락처]' }}
+- 사업체:{{ employer_name or '[피신고 사업체명]' }}
+- 직위 / 근무지:{{ position or '[직위]' }} / {{ workplace or '[근무지]' }}
+- 고용기간:{{ employment_start or '[입사일]' }} ~ {{ employment_end or '현재' }}
+
+## 2. 위반 의심 사항
+
+{% for line in violation_lines -%}
+- {{ line }}
+{% endfor %}
+상세한 사실관계(일시, 장소, 관계자)는 첨부 증거 자료를 참고하시기 바랍니다.
+
+## 3. 첨부 증거
+
+본 신고에는 {{ evidence_count }}건의 증거가 첨부되어 있습니다.
+전체 목록 및 SHA-256 무결성 해시는 `evidence_index.json`에,
+원본 파일은 `evidence/` 디렉터리에 보관되어 있습니다.
+
+{% if summary -%}
+## 4. 사건 개요
+
+{{ summary }}
+
+{% endif -%}
+## 5. 요청 사항
+
+1. {{ employer_name or '[피신고 사업체]' }}에 대한 노동법 위반 행위의 전면 조사
+2. 체불賃金·加班수당·사회보험료 납부, 산재보상 등 위법 상태의 시정 명령
+3. 관련자의 법적 책임 추궁
+4. 신고자에 대한 보복 행위 금지 및 신고자 보호
+
+## 6. 성명
+
+이상과 같이 신고드린 내용은 사실이며, 허위가 있을 경우 일체의 법적 책임을
+부담할 것임을 서약합니다.
+추가 자료가 필요하시거나 확인하실 사항이 있으시면 상기 연락처로 연락 주시기
+바랍니다.
+
+감사합니다.
+
+신고인:{{ complainant_name or '[신고인 성명]' }}
+날짜:{{ today | format_date }}
