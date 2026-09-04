@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>労働権侵害通報 - {{ employer_name or '[被通報事業者]' }}</title>
+</head>
+<body style="font-family:'Hiragino Sans','Yu Gothic',Meiryo,sans-serif;line-height:1.8;color:#222;max-width:760px;margin:0 auto;padding:24px;">
+  <div style="background:#fff5f5;border-left:4px solid #c33;padding:12px 16px;margin-bottom:24px;">
+    <strong style="color:#900;">労働法令違反に関する通報({{ employer_name or '[被通報事業者]' }})</strong>
+  </div>
+  <p>{{ recipient_name or '[通報先]' }} 御中</p>
+  <p>私は <strong>{{ complainant_name or '[通報者]' }}</strong>(連絡先:{{ complainant_contact or '[連絡先]' }})として、
+     {{ employer_name or '[被通報事業者]' }} による重大な労働権侵害について、関係法令および ILO 国際労働基準に基づき調査いただきたく通報いたします。</p>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">1. 当事者情報</h2>
+  <table style="border-collapse:collapse;width:100%;">
+    <tr><td style="padding:6px;background:#f7f7f7;width:30%;"><strong>通報者</strong></td><td style="padding:6px;">{{ complainant_name or '[通報者]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>連絡先</strong></td><td style="padding:6px;">{{ complainant_contact or '[連絡先]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>事業者</strong></td><td style="padding:6px;">{{ employer_name or '[被通報事業者]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>役職 / 勤務地</strong></td><td style="padding:6px;">{{ position or '[役職]' }} / {{ workplace or '[勤務地]' }}</td></tr>
+    <tr><td style="padding:6px;background:#f7f7f7;"><strong>雇用期間</strong></td><td style="padding:6px;">{{ employment_start or '[入社日]' }} 〜 {{ employment_end or '現在' }}</td></tr>
+  </table>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">2. 違反が疑われる事項</h2>
+  <ul>
+  {% for v in violations -%}
+    <li>
+      <span style="background:#c33;color:#fff;padding:2px 8px;border-radius:3px;font-size:12px;">{{ v.code }}</span>
+      <strong>{{ violation_label(v.code) }}</strong>: {{ v.description or '' }}
+      {%- if v.amount is defined and v.amount and v.amount != 0 %}
+      <em style="color:#900;">(関連金額: {{ v.amount | format_currency(currency or 'JPY') }})</em>
+      {%- endif %}
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">3. 添付証拠</h2>
+  <p>本通報には <strong>{{ evidence_count }}</strong> 件の証拠を添付しています。
+     全件の目録および SHA-256 整合性ハッシュは <code>evidence_index.json</code> に、
+     原本ファイルは <code>evidence/</code> ディレクトリに格納しています。</p>
+
+  {% if summary -%}
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">4. 案件概要</h2>
+  <div style="background:#fafafa;border:1px solid #eee;padding:12px 16px;">{{ summary }}</div>
+  {% endif -%}
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">5. 要請事項</h2>
+  <ol>
+    <li>{{ employer_name or '[被通報事業者]' }} に対する法令違反の徹底した調査。</li>
+    <li>未払い賃金・残業代の支払い、社会保険料の納付、労災補償等、違法状態の是正命令。</li>
+    <li>関係者の法的責任の追及。</li>
+    <li>通報者に対する報復行為の禁止と通報者の安全確保。</li>
+  </ol>
+
+  <h2 style="color:#900;border-bottom:2px solid #c33;padding-bottom:6px;">6. 宣誓</h2>
+  <p>上記の内容は事実であり、虚偽があった場合は法的責任を負担することを誓います。
+     追加資料のご要望は上記連絡先までご連絡ください。</p>
+
+  <hr style="margin:24px 0;border:none;border-top:1px solid #ddd;">
+  <p>敬具</p>
+  <p style="margin-top:24px;">
+    <strong>{{ complainant_name or '[通報者]' }}</strong><br>
+    日付:{{ today | format_date }}
+  </p>
+
+  <p style="margin-top:32px;padding:12px;background:#f5f5f5;border-left:4px solid #999;font-size:12px;color:#666;">
+    本メールは Worker Rights Guardian により補助作成されたものです。法的助言ではありません。
+  </p>
+</body>
+</html>
