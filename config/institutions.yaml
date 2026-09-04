@@ -1,0 +1,302 @@
+# ============================================================
+# 监督机构数据库
+# ============================================================
+# 字段说明:
+#   - name       机构名称
+#   - type       hotline / email / online / address
+#   - scope      适用范围（如 全国 / China / USA / EU / global）
+#   - region     地区（可空）
+#   - description 简介
+#   - contact    电话（若有）
+#   - email      邮箱（若有）
+#   - url        网址（若有）
+#
+# 邮箱均来自各机构官网或公开材料，如发生变更请通过 PR 更新。
+# ============================================================
+
+china:
+  - name: "全国劳动保障监察投诉热线"
+    type: "hotline"
+    contact: "12333"
+    scope: "全国"
+    description: "人力资源和社会保障服务热线，可转接劳动监察部门"
+
+  - name: "国家信访局网上投诉平台"
+    type: "online"
+    url: "https://www.gjxfj.gov.cn/"
+    scope: "全国"
+    description: "国家信访局官方网上投诉渠道"
+
+  - name: "全国根治欠薪线索反映平台"
+    type: "online"
+    url: "https://www.12333.gov.cn/"
+    scope: "全国"
+    description: "国务院客户端/人社部官方欠薪投诉平台"
+
+  - name: "中华全国总工会"
+    type: "email"
+    email: "acftu@acftu.org"
+    scope: "全国"
+    description: "工会组织，可提供法律援助和维权指导"
+
+  - name: "北京市劳动保障监察总队"
+    type: "email"
+    email: "ldjc@rsj.beijing.gov.cn"
+    scope: "北京"
+    description: "北京市劳动监察部门"
+
+  - name: "上海市劳动保障监察机构"
+    type: "email"
+    email: "ldjc@rsj.sh.gov.cn"
+    scope: "上海"
+    description: "上海市人力资源和社会保障局劳动监察"
+
+  - name: "广东省劳动保障监察"
+    type: "email"
+    email: "ldjc@gdrst.gd.gov.cn"
+    scope: "广东"
+    description: "广东省劳动监察总队"
+
+international:
+  - name: "ILO - 日内瓦总部"
+    type: "email"
+    email: "ilo@ilo.org"
+    scope: "global"
+    region: "瑞士日内瓦"
+    description: "联合国负责工作世界的专门机构"
+
+  - name: "ILO - 北京局"
+    type: "email"
+    email: "beijing@ilo.org"
+    scope: "China"
+    region: "中国北京"
+    description: "国际劳工组织北京局"
+
+  - name: "ILO - 童工问题"
+    type: "email"
+    email: "childlabour@ilo.org"
+    scope: "global"
+    description: "国际劳工组织童工问题专项"
+
+  - name: "ILO - 结社自由委员会"
+    type: "email"
+    email: "ORGS-CEACR@ilo.org"
+    scope: "global"
+    description: "雇主组织和工人组织可直接提交意见"
+
+  - name: "联合国人权事务高级专员办事处"
+    type: "email"
+    email: "ohchr@un.org"
+    scope: "global"
+    description: "联合国人权高专办"
+
+  - name: "联合国工人权利特别报告员"
+    type: "email"
+    email: "srwork@ohchr.org"
+    scope: "global"
+    description: "联合国当代形式奴隶制问题特别报告员"
+
+usa:
+  - name: "美国劳工部 Wage and Hour Division"
+    type: "email"
+    email: "whd@dol.gov"
+    scope: "USA"
+    description: "工资与工时部门，处理欠薪、加班费等"
+
+  - name: "OSHA - 职业安全与健康管理局"
+    type: "email"
+    email: "osha@dol.gov"
+    scope: "USA"
+    description: "工作场所安全与健康投诉"
+
+  - name: "NLRB - 国家劳动关系委员会"
+    type: "email"
+    email: "info@nlrb.gov"
+    scope: "USA"
+    description: "不公平劳动行为投诉"
+
+  - name: "EEOC - 平等就业机会委员会"
+    type: "email"
+    email: "info@eeoc.gov"
+    scope: "USA"
+    description: "就业歧视投诉"
+
+eu:
+  - name: "EU-OSHA - 欧盟职业安全健康局"
+    type: "email"
+    email: "information@osha.europa.eu"
+    scope: "EU"
+    description: "欧盟工作场所安全与健康"
+
+  - name: "EU Labour Authority"
+    type: "email"
+    email: "info@ela.europa.eu"
+    scope: "EU"
+    description: "欧盟劳动管理局"
+
+  - name: "ETUC - 欧洲工会联合会"
+    type: "email"
+    email: "etuc@etuc.org"
+    scope: "EU"
+    description: "欧洲工会组织"
+
+  - name: "Eurofound - 欧洲改善生活和工作条件基金会"
+    type: "email"
+    email: "information@eurofound.europa.eu"
+    scope: "EU"
+    description: "欧盟劳资关系与工作条件研究机构"
+
+  - name: "European Commission DG EMPL - 就业与社会事务总司"
+    type: "online"
+    url: "https://ec.europa.eu/social/main.jsp?catId=2"
+    scope: "EU"
+    description: "欧盟劳工权益投诉在线表格"
+
+  - name: "France - Direction Générale du Travail"
+    type: "online"
+    url: "https://travail-emploi.gouv.fr/"
+    scope: "France"
+    description: "法国劳动监察总署"
+
+  - name: "Germany - Bundesministerium für Arbeit"
+    type: "email"
+    email: "buergerservice@bmas.bund.de"
+    scope: "Germany"
+    description: "德国联邦劳动与社会事务部"
+
+  - name: "Netherlands - Arbeidsinspectie"
+    type: "online"
+    url: "https://www.nlarbeidsinspectie.nl/"
+    scope: "Netherlands"
+    description: "荷兰劳动监察局"
+
+  - name: "Sweden - Arbetsmiljöverket"
+    type: "email"
+    email: "arbetsmiljoverket@av.se"
+    scope: "Sweden"
+    description: "瑞典工作环境局"
+
+uk:
+  - name: "Acas - 咨询调解仲裁服务"
+    type: "email"
+    email: "customer@acas.org.uk"
+    scope: "UK"
+    description: "英国劳动纠纷调解仲裁"
+
+  - name: "HMRC - 最低工资执法"
+    type: "email"
+    email: "nationalminimumwage@hmrc.gov.uk"
+    scope: "UK"
+    description: "英国最低工资执法"
+
+  - name: "Employment Tribunal"
+    type: "online"
+    url: "https://www.gov.uk/employment-tribunal"
+    scope: "UK"
+    description: "英国劳动法庭"
+
+japan:
+  - name: "日本劳动基准监督署"
+    type: "email"
+    email: "roudou@mlit.go.jp"
+    scope: "Japan"
+    description: "日本劳动基准监督署"
+
+  - name: "日本中央劳动委员会"
+    type: "email"
+    email: "info@clc.go.jp"
+    scope: "Japan"
+    description: "日本劳动委员会"
+
+  - name: "日本厚生劳动省 労働基準局"
+    type: "email"
+    email: "rouki-bun@mhlw.go.jp"
+    scope: "Japan"
+    description: "日本厚生劳动省劳动基准局"
+
+  - name: "日本劳动政策研究·研修机构 (JIL)"
+    type: "email"
+    email: "info@jil.go.jp"
+    scope: "Japan"
+    description: "日本劳动政策研究机构"
+
+korea:
+  - name: "韩国雇佣劳动部"
+    type: "email"
+    email: "webmaster@moel.go.kr"
+    scope: "Korea"
+    description: "韩国雇佣劳动部"
+
+  - name: "韩国劳动委员会"
+    type: "email"
+    email: "nlrc@nlrc.go.kr"
+    scope: "Korea"
+    description: "韩国国家劳动委员会"
+
+  - name: "韩国雇佣情报院"
+    type: "online"
+    url: "https://www.work.go.kr/"
+    scope: "Korea"
+    description: "韩国雇佣情报院"
+
+  - name: "韩国产业安全保健公团 (KOSHA)"
+    type: "email"
+    email: "ksh@kosha.or.kr"
+    scope: "Korea"
+    description: "韩国产业安全保健公团"
+
+australia:
+  - name: "Fair Work Ombudsman"
+    type: "email"
+    email: "info@fwo.gov.au"
+    scope: "Australia"
+    description: "澳大利亚公平工作监察专员"
+
+  - name: "Safe Work Australia"
+    type: "email"
+    email: "info@safeworkaustralia.gov.au"
+    scope: "Australia"
+    description: "澳大利亚安全工作局"
+
+  - name: "Fair Work Commission"
+    type: "email"
+    email: "fwc@fwc.gov.au"
+    scope: "Australia"
+    description: "澳大利亚公平工作委员会"
+
+  - name: "Australian Human Rights Commission"
+    type: "email"
+    email: "communications@humanrights.gov.au"
+    scope: "Australia"
+    description: "澳大利亚人权委员会"
+
+  - name: "Asbestos Safety and Eradication Agency"
+    type: "online"
+    url: "https://www.asbestossafety.gov.au/"
+    scope: "Australia"
+    description: "澳大利亚石棉安全与根除机构"
+
+new_zealand:
+  - name: "Employment New Zealand"
+    type: "email"
+    email: "info@employment.govt.nz"
+    scope: "New Zealand"
+    description: "新西兰雇佣关系局"
+
+  - name: "Labour Inspectorate"
+    type: "email"
+    email: "labourinspectorate@mbie.govt.nz"
+    scope: "New Zealand"
+    description: "新西兰劳动监察局"
+
+  - name: "Worksafe New Zealand"
+    type: "email"
+    email: "info@worksafe.govt.nz"
+    scope: "New Zealand"
+    description: "新西兰工作安全局"
+
+  - name: "New Zealand Human Rights Commission"
+    type: "online"
+    url: "https://tikatangata.org.nz/"
+    scope: "New Zealand"
+    description: "新西兰人权委员会"
